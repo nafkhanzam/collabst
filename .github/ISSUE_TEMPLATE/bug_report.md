@@ -1,8 +1,8 @@
 ---
-name: 🐛 Bug Report
+name: "\U0001F41B Bug Report"
 about: Report a bug that needs to be fixed
-title: '[BUG] '
-labels: 'bug'
+title: "[BUG] "
+labels: bug
 assignees: ''
 
 ---
@@ -11,7 +11,7 @@ assignees: ''
 <!-- A clear and concise description of what the bug is -->
 
 ## 🔍 Current Behavior
-<!-- What is currently happening? -->
+<!-- What is currently happening?-->
 
 ## ✅ Expected Behavior
 <!-- What should happen instead? -->
@@ -38,25 +38,3 @@ assignees: ''
 
 ## 📸 Screenshots/Logs
 <!-- If applicable, add screenshots or error logs -->
-
-## 💥 Impact
-<!-- Check one -->
-- [ ] Critical - Blocks major functionality or causes data loss
-- [ ] High - Significant feature broken, workaround exists
-- [ ] Medium - Minor feature broken, minimal impact
-- [ ] Low - Cosmetic issue or edge case
-
-## 🎯 Priority
-<!-- For team planning -->
-- [ ] Urgent - Fix immediately
-- [ ] High - Fix in current sprint
-- [ ] Medium - Fix in next sprint
-- [ ] Low - Fix when possible
-
-## 🔗 Related Issues
-<!-- Link any related issues or PRs -->
-- Related to #
-- Blocks #
-
-## 💡 Additional Context
-<!-- Add any other context, workarounds, or ideas -->

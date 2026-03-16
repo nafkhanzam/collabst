@@ -1,17 +1,14 @@
 ---
-name: 🔧 Technical Task
+name: "\U0001F527 Technical Task"
 about: Technical improvements, refactoring, or infrastructure work
-title: '[TECH] '
-labels: 'technical'
+title: "[TECH] "
+labels: ''
 assignees: ''
 
 ---
 
 ## 🔧 Task Summary
 <!-- Brief description of the technical work -->
-
-## 🎯 Objective
-<!-- What is the goal of this technical work? What problem does it solve? -->
 
 ## 📋 Task Type
 <!-- Check the primary type -->
@@ -42,63 +39,7 @@ assignees: ''
 - [ ] Docker/Deployment
 - [ ] Documentation
 
-## 📝 Implementation Plan
-<!-- High-level steps to complete this task -->
-- [ ] 
-- [ ] 
-- [ ] 
-
-## 🔧 Technical Details
-<!-- Any specific technical approach, patterns, or considerations -->
-
-**Approach:**
-
-**Key Files/Modules:**
-- 
-
-**Dependencies:**
-- 
-
-## ✅ Definition of Done
-<!-- When is this task complete? -->
-- [ ] Code changes implemented and tested
-- [ ] Documentation updated
-- [ ] No breaking changes (or migration plan in place)
-- [ ] Code reviewed
-- [ ] 
-
-## ⚠️ Risks & Breaking Changes
-<!-- Any potential risks, breaking changes, or rollback plan? -->
-
-**Breaking Changes:**
-- None / [Describe breaking changes]
-
-**Mitigation:**
-- 
-
-## 📊 Effort Estimation
-- [ ] XS - Few hours
-- [ ] S - 1-2 days
-- [ ] M - 3-5 days
-- [ ] L - 1-2 weeks
-- [ ] XL - 2+ weeks
-
-## 🎯 Priority
-- [ ] Critical - Address immediately (security, data loss, system down)
-- [ ] High - Important for stability/scalability
-- [ ] Medium - Should do soon
-- [ ] Low - Nice to have, future consideration
-
-## 📈 Success Criteria
-<!-- How will we measure the success of this technical change? -->
-- [ ] 
-- [ ] 
-
 ## 🔗 Related Issues
 - Related to #
 - Blocks #
 - Blocked by #
-
-## 💡 Additional Notes
-<!-- Any other relevant information, resources, or references -->
-
