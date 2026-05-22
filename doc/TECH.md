@@ -8,7 +8,7 @@ Collabst is a real-time collaborative Typst editor. The stack is built around [Y
 |---|---|
 | Frontend | Svelte 5 + SvelteKit, TypeScript, Vite |
 | Backend | FastAPI, Python 3.12, uv |
-| Database | PostgreSQL 16 — SQLAlchemy async, Alembic migrations |
+| Database | PostgreSQL 18 — SQLAlchemy async, Alembic migrations |
 | Live state | Redis — active Yjs document state |
 | Object storage | MinIO — binary assets (S3-compatible) |
 | Auth | JWT (access + refresh tokens), bcrypt |
