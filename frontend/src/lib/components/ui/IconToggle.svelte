@@ -35,46 +35,4 @@
     {/each}
 </div>
 
-<style>
-    .icon-toggle {
-        display: flex;
-        background: var(--bg-primary);
-        border: 2px solid var(--border-primary);
-        border-radius: 4px;
-        overflow: hidden;
-    }
-
-    .toggle-btn {
-        background: transparent;
-        border: none;
-        padding: 0.5rem 0.75rem;
-        cursor: pointer;
-        color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-right: 1px solid var(--border-primary);
-    }
-
-    .toggle-btn:last-child {
-        border-right: none;
-    }
-
-    .toggle-btn:hover {
-        background: var(--surface-hover);
-        color: var(--text-primary);
-    }
-
-    .toggle-btn.active {
-        background: var(--border-primary);
-        color: var(--color-primary-500);
-    }
-
-    .toggle-btn:active {
-        & > :global(svg),
-        & > :global(span),
-        & > :global(i) {
-            transform: scaleY(0.9) scaleX(1.15);
-        }
-    }
-</style>
+<style></style>

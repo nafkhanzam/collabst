@@ -9,20 +9,4 @@
   {/each}
 </div>
 
-<style>
-  .notification-container {
-    position: fixed;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 0.5rem;
-    z-index: 2147483000;
-    pointer-events: none;
-  }
-
-  .notification-container :global(.notification) {
-    pointer-events: auto;
-  }
-</style>
+<style></style>

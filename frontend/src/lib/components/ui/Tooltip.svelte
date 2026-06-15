@@ -180,10 +180,4 @@
   </span>
 </div>
 
-<style>
-  .tooltip-wrapper {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-  }
-</style>
+<style></style>

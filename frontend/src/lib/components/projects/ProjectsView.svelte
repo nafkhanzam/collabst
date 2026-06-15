@@ -131,48 +131,4 @@
   {/if}
 </div>
 
-<style>
-  .content {
-    padding: 2rem;
-    padding-top: 1rem;
-    flex: 1;
-    /* Prevent initial flash */
-    contain: layout style;
-  }
-
-  .page-title {
-    font-size: 48px;
-    font-weight: 700;
-    margin: 1.5rem 0 1.5rem 0;
-    margin-left: 2.3rem;
-    color: var(--text-primary);
-    text-align: left;
-    font-family: "DM Serif Display", Georgia, serif;
-    letter-spacing: -0.02em;
-  }
-
-  .controls-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .view-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-left: auto;
-  }
-
-  .sort-label {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-secondary);
-  }
-
-  .sort-dropdown {
-    min-width: 150px;
-    margin-right: 1.8rem;
-  }
-</style>
+<style></style>

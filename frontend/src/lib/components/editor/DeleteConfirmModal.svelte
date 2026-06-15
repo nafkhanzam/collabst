@@ -28,10 +28,4 @@
   {/snippet}
 </Modal>
 
-<style>
-  .message {
-    color: var(--text-primary);
-    font-size: var(--text-base);
-    margin: 0;
-  }
-</style>
+<style></style>

@@ -132,34 +132,4 @@
   </div>
 {/if}
 
-<style>
-  .share-join-screen {
-    min-height: 100vh;
-    display: grid;
-    place-content: center;
-    text-align: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    color: var(--text-primary);
-    background: var(--bg-primary);
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 1.25rem;
-  }
-
-  p {
-    margin: 0;
-    color: var(--text-secondary);
-  }
-
-  .subtle {
-    font-size: 0.875rem;
-  }
-
-  .footer {
-    margin-top: 1rem;
-    text-align: center;
-  }
-</style>
+<style></style>
