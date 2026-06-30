@@ -35,4 +35,62 @@
   <Icon size={16} {strokeWidth} />
 </button>
 
-<style></style>
+<style>
+  .tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: var(--bg-editor);
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+    min-width: 30px;
+    height: 30px;
+  }
+
+  .tool-btn:hover:not(:disabled) {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border-color: var(--border-secondary);
+  }
+
+  .tool-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .tool-btn:active:not(:disabled) {
+    background: var(--surface-active);
+    color: var(--text-active);
+    transform: scaleY(0.92) scaleX(0.95) translateY(1px);
+  }
+
+  /* Position variants - handle border radius and margins */
+  .tool-btn-standalone {
+    border-radius: var(--radius-md);
+  }
+
+  .tool-btn-first {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+
+  .tool-btn-middle {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .tool-btn-last {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+  }
+</style>

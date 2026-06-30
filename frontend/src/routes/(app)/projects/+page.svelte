@@ -12,7 +12,7 @@
   import InviteModal from "$lib/components/projects/InviteModal.svelte";
   import DeleteModal from "$lib/components/projects/DeleteModal.svelte";
   import type { CollaboratorRole, Project } from "$lib/types";
-  import collabstLogo from "../../../assets/collabst-text.svg";
+  import collabstLogo from "../../../assets/collabst-text-vertical.svg";
   import CircleHelp from "@lucide/svelte/icons/circle-help";
   import Rocket from "@lucide/svelte/icons/rocket";
   import Settings from "@lucide/svelte/icons/settings";
@@ -199,4 +199,165 @@
   </div>
 {/if}
 
-<style></style>
+<style>
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-canvas, var(--bg-primary));
+    visibility: hidden;
+  }
+
+  .container.mounted {
+    visibility: visible;
+    animation: fadeIn 0.1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    background: var(--bg-top-bar);
+    /* Prevent layout shift by reserving space for activity bar */
+    min-height: 0;
+  }
+
+  .activity-bar {
+    width: 56px;
+    background: var(--bg-top-bar);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-3) 0;
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+
+  .spacer {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .bottom-activities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .activity-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .activity-btn:hover {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
+
+  .activity-btn.active {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
+
+  .activity-btn:active {
+    transform: scale(0.9);
+  }
+
+  .logo-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+
+  .collabst-logo {
+    width: auto;
+    height: 110px;
+    filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(95%) contrast(90%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  :global([data-theme="light"]) .collabst-logo {
+    filter: invert(19%) sepia(20%) saturate(767%) hue-rotate(129deg)
+      brightness(95%) contrast(70%);
+  }
+
+  .content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-canvas, var(--bg-primary));
+    border-top-left-radius: 8px;
+    /* Prevent content jump during initial render */
+    min-width: 0;
+  }
+
+  header {
+    background: var(--bg-top-bar);
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-shrink: 0;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+    margin-left: auto;
+  }
+
+  .loading {
+    font-family: "DM Serif Display", Georgia, serif;
+    letter-spacing: -0.02em;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: var(--text-secondary);
+    background: var(--bg-top-bar);
+  }
+
+  .invitations-section {
+    padding: 2rem;
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+  }
+</style>

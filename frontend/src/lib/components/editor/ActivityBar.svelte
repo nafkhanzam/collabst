@@ -9,7 +9,7 @@
   import CircleHelp from "@lucide/svelte/icons/circle-help";
   import Rocket from "@lucide/svelte/icons/rocket";
   import Settings from "@lucide/svelte/icons/settings";
-  import collabstLogo from "../../../assets/collabst-text.svg";
+  import collabstLogo from "../../../assets/collabst-text-vertical.svg";
   import type { Diagnostic } from "$lib/types";
 
   type NotificationType = "error" | "warning" | "info" | "hint" | "comments";
@@ -175,4 +175,78 @@
   </div>
 </div>
 
-<style></style>
+<style>
+  .activity-bar {
+    width: 56px;
+    background: var(--bg-top-bar);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 0 var(--space-3) 0;
+  }
+
+  .top-activities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .bottom-activities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .activity-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .activity-btn:hover {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
+
+  .activity-btn:active {
+    transform: scale(0.9);
+  }
+
+  .activity-btn.active {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
+
+  .logo-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+
+  .collabst-logo {
+    width: auto;
+    height: 110px;
+    filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(95%) contrast(90%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  :global([data-theme="light"]) .collabst-logo {
+    filter: invert(19%) sepia(20%) saturate(767%) hue-rotate(129deg)
+      brightness(95%) contrast(70%);
+  }
+</style>

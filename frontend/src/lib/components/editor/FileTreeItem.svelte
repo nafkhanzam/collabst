@@ -285,4 +285,178 @@
   </div>
 </div>
 
-<style></style>
+<style>
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+
+  .file-item.active {
+    background: var(--surface-hover);
+  }
+
+  .file-item:hover {
+    background: color-mix(
+      in srgb,
+      var(--color-tertiary-500) 30%,
+      var(--surface-secondary)
+    );
+  }
+
+  .file-item:hover.folder {
+    background: color-mix(
+      in srgb,
+      var(--color-primary-500) 30%,
+      var(--surface-secondary)
+    );
+  }
+
+  .file-item:active:not(:has(.preview-btn:active)) {
+    background: color-mix(
+      in srgb,
+      var(--color-secondary-500) 40%,
+      var(--surface-secondary)
+    );
+    transition: background 0.02s ease-out;
+  }
+
+  .file-item:active:not(:has(.preview-btn:active)):not(.folder) .icon {
+    animation: jumpAnimation 0.2s ease-out;
+  }
+
+  @keyframes jumpAnimation {
+    0% {
+      transform: translateY(-4px) scaleX(0.8) scaleY(1.1);
+    }
+    80% {
+      transform: translateY(2px) scaleX(1.1) scaleY(0.95);
+    }
+    100% {
+      transform: none;
+    }
+  }
+
+  .file-item.folder:active .icon {
+    transform: scaleY(0.8) scaleX(1.1);
+    transition: transform 0.1s ease;
+  }
+
+  .file-item[draggable="true"] {
+    cursor: grab;
+  }
+
+  .file-item[draggable="true"]:active {
+    cursor: grabbing;
+  }
+
+  .file-item:global(.dragging) {
+    opacity: 0.5;
+  }
+
+  .chevron-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50px;
+  }
+
+  .icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: inherit;
+  }
+
+  .info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .name {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+    padding: 2px 6px;
+    margin: 0;
+  }
+
+  .name-input {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    margin: 0;
+  }
+
+  .name-input:focus {
+    border-color: var(--color-primary-500);
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 0px;
+  }
+
+  .user-indicators {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .user-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  .preview-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50px;
+  }
+
+  .preview-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .preview-btn:active {
+    color: var(--text-active);
+    transform: scaleY(0.9) scaleX(1.2);
+  }
+</style>

@@ -102,4 +102,47 @@
     </div>
 </div>
 
-<style></style>
+<style>
+    .asset-metadata {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .filename {
+        color: var(--text-primary);
+        font-size: var(--text-lg);
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+    }
+
+    .metadata-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: var(--space-2) 0;
+    }
+
+    .metadata-row {
+        display: contents;
+    }
+
+    .metadata-label {
+        color: var(--text-secondary);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        text-align: right;
+        padding-right: var(--space-2);
+    }
+
+    .metadata-value {
+        color: var(--text-primary);
+        font-size: var(--text-sm);
+        text-align: left;
+        padding-left: var(--space-2);
+    }
+</style>

@@ -28,4 +28,75 @@
   {/if}
 </div>
 
-<style></style>
+<style>
+  .notifiable {
+    position: relative;
+    display: inline-block;
+  }
+
+  .notification-dot {
+    position: absolute;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50px;
+    background: var(--color-error);
+    box-shadow: 0 0 10px var(--color-error-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: fit-content;
+  }
+
+  .notification-dot.type-error {
+    background: var(--color-error);
+    box-shadow: 0 0 10px var(--color-error-glow);
+  }
+
+  .notification-dot.type-warning {
+    background: var(--color-warning);
+    box-shadow: 0 0 10px var(--color-warning-glow);
+  }
+
+  .notification-dot.type-info {
+    background: var(--color-info);
+    box-shadow: 0 0 10px var(--color-info-glow);
+  }
+
+  .notification-dot.type-hint {
+    background: var(--color-hint);
+    box-shadow: 0 0 10px var(--color-hint-glow);
+  }
+
+  .notification-dot.type-comments {
+    background: var(--color-comment);
+    box-shadow: 0 0 10px var(--color-comments-glow);
+  }
+
+  .count-text {
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+  }
+
+  .notification-dot.position {
+    width: var(--dot-size);
+    height: var(--dot-size);
+  }
+
+  .notifiable :global(.notification-dot:not([class*="position"])),
+  .notifiable
+    :global(
+      .notification-dot.position:not([class*="top-left"]):not(
+          [class*="bottom-right"]
+        ):not([class*="bottom-left"])
+    ) {
+    top: calc(var(--dot-size) * -0.5);
+    right: calc(var(--dot-size) * -0.5);
+  }
+
+  .notifiable :global(.notification-dot.position) {
+    top: calc(var(--dot-size) * -0.5);
+    right: calc(var(--dot-size) * -0.5);
+  }
+</style>

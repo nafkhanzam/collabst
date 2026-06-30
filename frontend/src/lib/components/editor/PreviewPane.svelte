@@ -679,4 +679,113 @@
   </div>
 </div>
 
-<style></style>
+<style>
+  .preview-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .preview-toolbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 0 var(--space-2) 0;
+    overflow: visible;
+    background: var(--bg-top-bar);
+  }
+
+  .zoom-controls {
+    display: flex;
+    overflow: visible;
+  }
+
+  .download-controls {
+    margin-left: auto;
+    display: flex;
+  }
+
+  .preview-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .preview-iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
+
+  .corner {
+    position: absolute;
+    top: 0;
+    width: var(--radius-lg);
+    height: var(--radius-lg);
+    fill: var(--bg-primary);
+    pointer-events: none;
+  }
+
+  .left {
+    left: 0;
+  }
+
+  .right {
+    right: 0;
+  }
+
+  .preview-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-preview);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    color: var(--text-muted);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+  }
+
+  /* Typst text selection and positioning */
+  :global(.tsel span),
+  :global(.tsel) {
+    left: 0;
+    position: fixed;
+    text-align: justify;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    text-align-last: justify;
+    color: transparent;
+  }
+
+  :global(.tsel span::-moz-selection),
+  :global(.tsel::-moz-selection) {
+    color: transparent;
+    background: #7db9dea0;
+  }
+
+  :global(.tsel span::selection),
+  :global(.tsel::selection) {
+    color: transparent;
+    background: #7db9dea0;
+  }
+
+  :global(.negative-filter .typst-doc) {
+    filter: invert(1);
+  }
+
+  :global(.pseudo-link) {
+  fill: transparent;
+  cursor: pointer;
+  pointer-events: all;
+}
+</style>

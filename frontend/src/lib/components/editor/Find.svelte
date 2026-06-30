@@ -214,4 +214,89 @@
   </div>
 </div>
 
-<style></style>
+<style>
+  .find-panel {
+    position: absolute;
+    inset: auto 8px 8px 8px;
+    background: var(--find-bg);
+    backdrop-filter: blur(var(--find-blur));
+    -webkit-backdrop-filter: blur(var(--find-blur));
+    border: 1px solid var(--dropdown-border);
+    border-radius: 14px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+    min-width: 300px;
+    max-width: 455px;
+    width: auto;
+    box-sizing: border-box;
+    overflow: visible;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .find-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .search-area,
+  .replace-area {
+    display: flex;
+    gap: 4px;
+    border: 2px solid var(--bg-editor);
+    border-radius: 8px;
+    background: var(--bg-editor);
+    align-items: center;
+    padding: 2px;
+    flex: 1 1 0%;
+    min-width: 0;
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .search-area:hover,
+  .replace-area:hover {
+    border: 2px solid var(--dropdown-border);
+  }
+
+  .search-area:focus-within,
+  .replace-area:focus-within {
+    border: 2px solid var(--text-tertiary);
+  }
+
+  .search-input,
+  .replace-input {
+    flex: 1 1 0%;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    background: var(--bg-editor);
+    border: none;
+    outline: none;
+    min-height: 26px;
+    min-width: 0;
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .search-input::placeholder,
+  .replace-input::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  .button-group {
+    display: flex;
+  }
+
+  .spacer {
+    width: 34px; /* Match close button width */
+  }
+</style>

@@ -59,4 +59,121 @@
   </div>
 {/if}
 
-<style></style>
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--dialog-backdrop);
+    backdrop-filter: blur(var(--dialog-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--dialog-backdrop-blur));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: var(--z-modal-backdrop);
+    animation: fadeIn var(--transition-fast);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-content {
+    background: var(--dialog-bg);
+    border: 2px solid var(--dialog-border);
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 500px;
+    box-shadow: var(--shadow-2xl);
+    animation: slideUp var(--transition-base);
+  }
+
+  .modal-content h2 {
+    font-size: 2.3rem;
+    font-weight: 900;
+    margin: 0rem 0 1.5rem 0.1rem;
+    color: var(--dialog-text);
+    letter-spacing: -0.02em;
+    font-family: "DM Serif Display", Georgia, serif;
+  }
+
+  .delete-message {
+    color: var(--dialog-text);
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+
+  .cancel-btn {
+    flex: 1;
+    background: var(--dialog-cancel-btn-bg);
+    color: var(--dialog-text);
+    border: none;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    font-size: var(--text-base);
+  }
+
+  .cancel-btn:hover {
+    background: var(--dialog-cancel-btn-hover);
+  }
+
+  .cancel-btn:active {
+    background: var(--dialog-cancel-btn-active);
+    color: var(--text-active);
+  }
+
+  .delete-btn {
+    flex: 1;
+    background: var(--color-error);
+    color: white;
+    border: 1px solid var(--color-error);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: var(--text-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .delete-btn:hover {
+    background: var(--color-error-dark);
+    box-shadow: 0 1px 8px var(--color-error-glow);
+  }
+
+  .delete-btn:active {
+    box-shadow: 0 1px 16px var(--color-error-glow);
+  }
+</style>

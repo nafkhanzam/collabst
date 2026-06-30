@@ -6,16 +6,12 @@
     <br />
     <b>Self-host a collaborative workspace for Typst.</b>
   </h4>
+  
 </h1>
 
-> [!CAUTION]
-> **This repo is under maintainance and is not currently functional. Don't worry, once the refactor and redesign is complete, Collabst will be back!**
-
-<!--
 <p align="center">
 <img src="assets/screenshots/fullscreen/editor.png" width="800px">
 </p>
--->
 
 <p align="center">
   <img src="https://img.shields.io/github/license/collabst/collabst?style=flat-square&labelColor=%2326ad84&color=%2396e7c8" alt="GitHub License" />
@@ -39,7 +35,6 @@
 
 <br />
 
-<!--
 ## 💥 Features
 
 Collabst allows you to collaborate on Typst projects and preview them while editing in your browser. Here are its main features: 
@@ -83,6 +78,8 @@ Collabst allows you to collaborate on Typst projects and preview them while edit
 
 And much more!
 
+If you want to learn more about the design choices behind Collabst's interface, [**click here**](/doc/DESIGN.md).
+
 ## 🏗️ How to Install
 
 ### Quick Setup🏃‍♀️‍➡️
@@ -123,7 +120,6 @@ For the complete setup instructions, you can follow the [`SETUP.md`](/SETUP.md) 
 We are looking for contributions to the Collabst project! There are many features that can still be added or refined, and certainly some bugs that could be fixed.
 
 If you want to contribute, please check the [`CONTRIBUTING.md` Guidelines](/CONTRIBUTING.md).
--->
 
 ## 🙏 Acknowledgements
 

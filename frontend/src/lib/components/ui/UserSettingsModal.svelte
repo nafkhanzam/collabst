@@ -412,4 +412,236 @@
     onConfirm={handleAvatarDelete}
 />
 
-<style></style>
+<style>
+    .content-root {
+        position: relative;
+        padding-top: 0;
+        padding: 1rem 1rem;
+    }
+
+    .top-actions {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    .hero {
+        display: flex;
+        gap: var(--space-4);
+        align-items: flex-start;
+        margin: 0;
+        padding-right: 40px;
+    }
+
+    .avatar-editor {
+        width: 90px;
+        height: 90px;
+        border-radius: 999px;
+        border: 1px solid var(--text-tertiary);
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: var(--bg-file-panel);
+    }
+
+    .avatar-editor:hover {
+        border: 1px solid var(--text-primary);
+    }
+
+    .avatar-fallback {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        font-size: var(--text-2xl);
+        font-weight: var(--font-semibold);
+        color: var(--text-secondary);
+    }
+
+    .avatar-fallback-hidden {
+        opacity: 0;
+    }
+
+    .avatar-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+    }
+
+    .avatar-image-loaded {
+        opacity: 1;
+    }
+
+    .avatar-overlay {
+        position: absolute;
+        inset: 0;
+        background: var(--surface-active);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.1rem;
+        opacity: 0;
+        transition: none;
+    }
+
+    .avatar-editor:hover .avatar-overlay,
+    .avatar-editor:focus-within .avatar-overlay {
+        opacity: 1;
+    }
+
+    .avatar-action {
+        width: 35px;
+        height: 35px;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, white 72%, transparent);
+        background: color-mix(in srgb, white 16%, transparent);
+        color: white;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+    }
+
+    .avatar-action:hover:not(:disabled) {
+        background: color-mix(in srgb, white 26%, transparent);
+    }
+
+    .avatar-action:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    .avatar-action-danger {
+        border-color: color-mix(in srgb, var(--color-error) 75%, white);
+        background: color-mix(in srgb, var(--color-error) 35%, transparent);
+    }
+
+    .avatar-action-danger:hover:not(:disabled) {
+        background: color-mix(in srgb, var(--color-error) 50%, transparent);
+    }
+
+    .hidden-file-input {
+        display: none;
+    }
+
+    .hero-meta {
+        min-width: 0;
+        gap: 4px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .name-row {
+        display: flex;
+        align-items: flex-end;
+        gap: var(--space-1);
+        min-height: 46px;
+    }
+
+    .display-name-button,
+    .display-name-input {
+        margin: 0;
+        color: var(--text-primary);
+        font-size: 40px;
+        font-family: "DM Serif Display", Georgia, serif;
+        letter-spacing: -0.015em;
+        line-height: 1;
+        height: 40px;
+        box-sizing: border-box;
+        padding-bottom: 0.1rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .display-name-input {
+        border: none;
+        background: transparent;
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+        width: min(420px, calc(100vw - 220px));
+        display: block;
+    }
+
+    .display-name-button {
+        border: none;
+        background: transparent;
+        text-align: left;
+        cursor: text;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: min(420px, calc(100vw - 220px));
+    }
+
+    .display-name-button:hover:not(:disabled),
+    .display-name-button:focus-visible {
+        outline-offset: 2px;
+        border-radius: var(--radius-sm);
+    }
+
+    .display-name-button:disabled {
+        cursor: default;
+        opacity: 0.85;
+    }
+
+    .edit-name-btn {
+        width: 28px;
+        height: 28px;
+        align-self: flex-end;
+        border: none;
+        border-radius: var(--radius-sm);
+        background: transparent;
+        color: var(--text-secondary);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transform: translateY(-2px);
+    }
+
+    .edit-name-btn:hover:not(:disabled) {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+    }
+
+    .edit-name-btn:active:not(:disabled) {
+        background: var(--surface-active);
+    }
+
+    .edit-name-btn:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    .hero-meta p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: var(--text-md);
+    }
+
+    .section {
+        border-top: 1px solid var(--border-primary);
+        padding-top: var(--space-4);
+        margin-top: var(--space-4);
+    }
+
+    .section h3 {
+        margin: 0 0 var(--space-3);
+        font-size: 1.5rem;
+        letter-spacing: -0.015em;
+    }
+
+    .fields {
+        display: grid;
+        gap: var(--space-3);
+    }
+
+    .password-actions {
+        margin-top: var(--space-4);
+        display: flex;
+        justify-content: flex-end;
+    }
+</style>

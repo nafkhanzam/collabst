@@ -1053,4 +1053,107 @@
   onClose={() => (showRightClickMenu = false)}
 />
 
-<style></style>
+<style>
+  .file-tree {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-file-panel);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 0 0 var(--space-3) 0;
+    padding-right: 0;
+  }
+
+  .tree-header {
+    padding: var(--space-4);
+    padding-right: var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  :global(.new-file-btn):hover {
+    color: var(--color-tertiary-500) !important;
+  }
+
+  :global(.upload-btn):hover {
+    color: var(--color-secondary-500) !important;
+  }
+
+  .tree-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .empty {
+    padding: var(--space-8) var(--space-4);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: var(--text-sm);
+  }
+
+  .file-item.creating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+    cursor: default;
+  }
+
+  .file-item.creating .icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: inherit;
+  }
+
+  .file-item.creating .name-input {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    margin: 0 8px 0 0;
+  }
+
+  .file-item.creating .name-input:focus {
+    border-color: var(--color-primary-500);
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 0px;
+  }
+
+  .drop-zone-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: inset 0 0 0 2px var(--color-primary-500);
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+  }
+</style>

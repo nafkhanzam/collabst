@@ -86,4 +86,104 @@
   </div>
 {/if}
 
-<style></style>
+<style>
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--dialog-backdrop);
+    backdrop-filter: blur(var(--dialog-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--dialog-backdrop-blur));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal-backdrop);
+    padding: var(--space-4);
+    animation: fadeIn var(--transition-fast);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal {
+    background: var(--dialog-bg);
+    border: 2px solid var(--dialog-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2xl);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 100%;
+    animation: slideUp var(--transition-base);
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-sm {
+    max-width: 400px;
+  }
+
+  .modal-md {
+    max-width: 600px;
+  }
+
+  .modal-lg {
+    max-width: 800px;
+  }
+
+  .modal-xl {
+    max-width: 1200px;
+  }
+
+  .modal-full {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .modal-title {
+    font-size: 2rem;
+    font-weight: var(--font-semibold);
+    font-family: "DM Serif Display", Georgia, serif;
+    letter-spacing: -0.01em;
+    color: var(--dialog-text);
+    margin: 0;
+  }
+
+  .modal-body {
+    padding: var(--space-6);
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .modal-footer {
+    padding: var(--space-4) var(--space-6);
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+  }
+
+  :global(.modal-close) {
+    margin-left: auto;
+  }
+</style>

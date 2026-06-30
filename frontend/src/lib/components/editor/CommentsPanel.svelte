@@ -391,4 +391,171 @@
   </div>
 </div>
 
-<style></style>
+<style>
+  .comments-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .filter-section {
+    padding: 8px 8px 4px;
+    flex-shrink: 0;
+  }
+
+  .filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    user-select: none;
+  }
+
+  .filter-checkbox {
+    display: none;
+  }
+
+  .filter-label {
+    position: relative;
+    color: var(--text-tertiary);
+  }
+
+  .filter-label:hover {
+    color: var(--text-secondary);
+  }
+
+  .filter-label:active {
+    color: var(--text-primary);
+    transform: translateY(1px);
+  }
+
+  .panel-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .panel-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .panel-content {
+    position: relative;
+    min-height: 100%;
+  }
+
+  .positioned-thread {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    transition: top 0.2s ease-out;
+  }
+
+  .empty-state {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: none;
+    text-align: center;
+    width: 90%;
+  }
+
+  .empty-icon {
+    font-size: 52px;
+    margin-bottom: 6px;
+    opacity: 0.3;
+    transform: translateX(35px);
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  .empty-state p {
+    font-size: 30px;
+    font-family: "DM Serif Display", Georgia, serif;
+    letter-spacing: -0.015em;
+    line-height: 1em;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+    font-weight: 900;
+  }
+
+  .empty-state span {
+    font-size: 15px;
+    color: var(--text-tertiary);
+  }
+
+  .new-comment-draft {
+    background: var(--surface-primary);
+    border: 1px solid var(--color-primary-600);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .new-comment-textarea {
+    width: 100%;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    padding: 8px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    resize: none;
+    margin-bottom: 8px;
+  }
+
+  .new-comment-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-600);
+  }
+
+  .draft-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .btn-cancel {
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+  }
+
+  .btn-cancel:hover {
+    background: var(--surface-hover);
+  }
+
+  .btn-submit {
+    background: var(--color-primary-600);
+    color: white;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+    background: var(--color-primary-700);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>

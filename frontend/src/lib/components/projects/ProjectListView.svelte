@@ -133,4 +133,138 @@
   {/if}
 </div>
 
-<style></style>
+<style>
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: -1rem;
+    margin-left: 2.3rem;
+    margin-right: 2.3rem;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+  }
+
+  .empty h2 {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .list-header {
+    display: grid;
+    grid-template-columns: 2fr 150px 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-canvas, var(--bg-primary));
+    border-bottom: 2px solid var(--border-primary);
+    font-weight: 600;
+    color: var(--text-primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .list-header-cell {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.15s;
+  }
+
+  .list-header-cell:hover {
+    color: var(--color-primary);
+  }
+
+  .list-row {
+    display: grid;
+    grid-template-columns: 2fr 150px 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    position: relative;
+    cursor: pointer;
+    background: var(--bg-canvas, var(--bg-primary));
+  }
+
+  .list-row.odd {
+    background: var(--bg-top-bar);
+  }
+
+  .list-row:hover {
+    background: color-mix(
+      in srgb,
+      var(--color-tertiary-500) 15%,
+      var(--surface-hover) 10%
+    );
+  }
+
+  .list-row:active:not(:has(.list-action-buttons .action-btn:active)) {
+    background: color-mix(
+      in srgb,
+      var(--color-secondary-500) 50%,
+      transparent 95%
+    );
+    transition: background 0.02s ease-out;
+  }
+
+  .list-row-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .list-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .project-col {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  :global(.project-file-icon) {
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .project-name {
+    font-weight: 500;
+  }
+
+  .actions-col {
+    justify-content: flex-start;
+  }
+
+  .list-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .list-row:hover .list-action-buttons {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+</style>

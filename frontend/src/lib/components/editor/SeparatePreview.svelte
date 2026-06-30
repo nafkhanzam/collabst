@@ -319,4 +319,84 @@
   </div>
 </div>
 
-<style></style>
+<style>
+  .preview-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: var(--space-2);
+  }
+
+  .preview-toolbar {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: var(--space-2);
+    overflow: visible;
+    background: var(--bg-top-bar);
+  }
+
+  .zoom-controls {
+    display: flex;
+    overflow: visible;
+  }
+
+  .split-view-control {
+    display: flex;
+  }
+
+  .download-controls {
+    margin-left: auto;
+    display: flex;
+  }
+
+  .preview-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .preview-iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
+
+  .corner {
+    position: absolute;
+    top: 0;
+    width: var(--radius-lg);
+    height: var(--radius-lg);
+    fill: var(--bg-primary);
+    pointer-events: none;
+  }
+
+  .left {
+    left: 0;
+  }
+
+  .right {
+    right: 0;
+  }
+
+  .preview-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-preview);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    color: var(--text-muted);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+  }
+</style>

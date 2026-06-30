@@ -28,4 +28,9 @@
   {...restProps}
 />
 
-<style></style>
+<style>
+  :global(.icon) {
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>

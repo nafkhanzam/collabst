@@ -255,4 +255,11 @@
   />
 </nav>
 
-<style></style>
+<style>
+  .menu-bar {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-left: 16px;
+  }
+</style>
