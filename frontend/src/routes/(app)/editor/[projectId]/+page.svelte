@@ -67,6 +67,7 @@
   } from "$lib/utils/assetCache";
   import SeparatePreview from "$lib/components/editor/SeparatePreview.svelte";
   import ShareDialog from "$lib/components/editor/ShareDialog.svelte";
+  import { derived } from "svelte/store";
 
   let projectId = $derived($page.params.projectId ?? "");
   let homeHref = $derived(
@@ -771,18 +772,58 @@
     }
   }
 
-  async function handleUploadAsset(filesToUpload: File[]) {
+  async function handleUploadAsset(
+    itemsToUpload: { file: File; relativePath: string }[],
+  ) {
     if (!canWrite) return;
-    if (filesToUpload.length === 0) return;
+    if (itemsToUpload.length === 0) return;
 
-    // Determine parent once per batch: if selected item is a folder, upload inside it.
-    const parentId = selectedFile?.is_folder ? selectedFile.id : null;
+    // Determine base parent once per batch: if selected item is a folder, upload inside it.
+    const baseParentId = selectedFile?.is_folder ? selectedFile.id : null;
+
+    // Recreate the folder structure implied by each item's relativePath
+    // (set when a directory was picked or dragged in), caching resolved
+    // folder ids per path so sibling files reuse the same parent.
+    const folderIdByPath = new Map<string, string | null>();
+
+    async function resolveParentFolder(relativePath: string): Promise<string | null> {
+      const segments = relativePath.split("/").slice(0, -1);
+      let pathKey = "";
+      let parentId = baseParentId;
+
+      for (const segment of segments) {
+        pathKey = pathKey ? `${pathKey}/${segment}` : segment;
+        const cached = folderIdByPath.get(pathKey);
+        if (cached !== undefined) {
+          parentId = cached;
+          continue;
+        }
+
+        const existingFolder = files.find(
+          (f) => f.is_folder && f.parent_id === parentId && f.name === segment,
+        );
+        if (existingFolder) {
+          parentId = existingFolder.id;
+        } else {
+          const newFolder = await filesApi.createFolder(projectId, segment, parentId);
+          if (!files.find((f) => f.id === newFolder.id)) {
+            files = [...files, newFolder];
+          }
+          parentId = newFolder.id;
+        }
+        folderIdByPath.set(pathKey, parentId);
+      }
+
+      return parentId;
+    }
+
     let successCount = 0;
     let failedCount = 0;
     const renamedItems: string[] = [];
 
-    for (const file of filesToUpload) {
+    for (const { file, relativePath } of itemsToUpload) {
       try {
+        const parentId = await resolveParentFolder(relativePath);
         const createdItem = await assetsApi.upload(projectId, file, parentId);
 
         if ("mime_type" in createdItem) {

@@ -1,18 +1,25 @@
 <script lang="ts">
   import Hand from "@lucide/svelte/icons/hand";
+  import Folder from "@lucide/svelte/icons/folder";
   import X from "@lucide/svelte/icons/x";
   import ListX from "@lucide/svelte/icons/list-x";
+
+  interface StagedItem {
+    file: File;
+    relativePath: string;
+  }
 
   interface UploadAssetModalProps {
     show: boolean;
     onClose: () => void;
-    onUpload: (files: File[]) => Promise<void> | void;
+    onUpload: (items: StagedItem[]) => Promise<void> | void;
   }
 
   let { show, onClose, onUpload }: UploadAssetModalProps = $props();
 
   let fileInput: HTMLInputElement | undefined = $state();
-  let stagedFiles: File[] = $state([]);
+  let directoryInput: HTMLInputElement | undefined = $state();
+  let stagedItems: StagedItem[] = $state([]);
   let isDragging = $state(false);
   let isUploading = $state(false);
 
@@ -35,17 +42,16 @@
     return () => window.removeEventListener("keydown", handleKeydown);
   });
 
-  function fileSignature(file: File): string {
-    return `${file.name}:${file.size}:${file.lastModified}`;
+  function itemSignature(item: StagedItem): string {
+    return `${item.relativePath}:${item.file.size}:${item.file.lastModified}`;
   }
 
-  function addFiles(files: FileList | File[]) {
-    const incoming = Array.from(files);
-    if (incoming.length === 0) return;
+  function addItems(items: StagedItem[]) {
+    if (items.length === 0) return;
 
-    const existing = new Set(stagedFiles.map(fileSignature));
-    const uniqueIncoming = incoming.filter((file) => {
-      const signature = fileSignature(file);
+    const existing = new Set(stagedItems.map(itemSignature));
+    const uniqueIncoming = items.filter((item) => {
+      const signature = itemSignature(item);
       if (existing.has(signature)) {
         return false;
       }
@@ -54,24 +60,97 @@
     });
 
     if (uniqueIncoming.length > 0) {
-      stagedFiles = [...stagedFiles, ...uniqueIncoming];
+      stagedItems = [...stagedItems, ...uniqueIncoming];
     }
+  }
+
+  function filesToItems(files: FileList | File[]): StagedItem[] {
+    return Array.from(files).map((file) => ({
+      file,
+      relativePath:
+        (file as File & { webkitRelativePath?: string }).webkitRelativePath ||
+        file.name,
+    }));
+  }
+
+  // Recursively walk a dropped directory entry, resolving to staged items
+  // with a relativePath rooted at the dragged folder (e.g. "folder/sub/file.txt").
+  function readEntry(
+    entry: FileSystemEntry,
+    prefix: string,
+  ): Promise<StagedItem[]> {
+    return new Promise((resolve) => {
+      if (entry.isFile) {
+        (entry as FileSystemFileEntry).file(
+          (file) => resolve([{ file, relativePath: `${prefix}${file.name}` }]),
+          () => resolve([]),
+        );
+      } else if (entry.isDirectory) {
+        const reader = (entry as FileSystemDirectoryEntry).createReader();
+        const collected: FileSystemEntry[] = [];
+        const readBatch = () => {
+          reader.readEntries(
+            async (batch) => {
+              if (batch.length === 0) {
+                const nested = await Promise.all(
+                  collected.map((child) =>
+                    readEntry(child, `${prefix}${entry.name}/`),
+                  ),
+                );
+                resolve(nested.flat());
+              } else {
+                collected.push(...batch);
+                readBatch();
+              }
+            },
+            () => resolve([]),
+          );
+        };
+        readBatch();
+      } else {
+        resolve([]);
+      }
+    });
   }
 
   function handleFileSelect(e: Event) {
     const target = e.target as HTMLInputElement;
     if (target.files) {
-      addFiles(target.files);
+      addItems(filesToItems(target.files));
     }
     target.value = "";
   }
 
-  function handleDrop(e: DragEvent) {
+  function handleDirectorySelect(e: Event) {
+    const target = e.target as HTMLInputElement;
+    if (target.files) {
+      addItems(filesToItems(target.files));
+    }
+    target.value = "";
+  }
+
+  async function handleDrop(e: DragEvent) {
     e.preventDefault();
     isDragging = false;
+
+    const items = e.dataTransfer?.items;
+    const entries = items
+      ? Array.from(items)
+          .map((item) => item.webkitGetAsEntry?.())
+          .filter((entry): entry is FileSystemEntry => !!entry)
+      : [];
+
+    if (entries.length > 0) {
+      const nested = await Promise.all(
+        entries.map((entry) => readEntry(entry, "")),
+      );
+      addItems(nested.flat());
+      return;
+    }
+
     const files = e.dataTransfer?.files;
     if (files) {
-      addFiles(files);
+      addItems(filesToItems(files));
     }
   }
 
@@ -87,25 +166,27 @@
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
-    if (stagedFiles.length === 0 || isUploading) return;
+    if (stagedItems.length === 0 || isUploading) return;
 
     isUploading = true;
     try {
-      await onUpload(stagedFiles);
-      stagedFiles = [];
+      await onUpload(stagedItems);
+      stagedItems = [];
       if (fileInput) fileInput.value = "";
+      if (directoryInput) directoryInput.value = "";
     } finally {
       isUploading = false;
     }
   }
 
   function removeStagedFile(index: number) {
-    stagedFiles = stagedFiles.filter((_, i) => i !== index);
+    stagedItems = stagedItems.filter((_, i) => i !== index);
   }
 
   function clearStagedFiles() {
-    stagedFiles = [];
+    stagedItems = [];
     if (fileInput) fileInput.value = "";
+    if (directoryInput) directoryInput.value = "";
   }
 
   function formatFileSize(bytes: number): string {
@@ -130,14 +211,15 @@
   function openFilePicker() {
     fileInput?.click();
   }
+
+  function openDirectoryPicker(e: MouseEvent) {
+    e.stopPropagation();
+    directoryInput?.click();
+  }
 </script>
 
 {#if show}
-  <div
-    class="modal"
-    onclick={handleBackdropClick}
-    role="presentation"
-  >
+  <div class="modal" onclick={handleBackdropClick} role="presentation">
     <div class="modal-content" role="dialog" aria-modal="true" tabindex="-1">
       <h2>Upload Files</h2>
       <form onsubmit={handleSubmit}>
@@ -146,6 +228,14 @@
           type="file"
           multiple
           onchange={handleFileSelect}
+          style="display: none;"
+        />
+        <input
+          bind:this={directoryInput}
+          type="file"
+          multiple
+          webkitdirectory=""
+          onchange={handleDirectorySelect}
           style="display: none;"
         />
 
@@ -162,13 +252,23 @@
         >
           <Hand size={64} strokeWidth={1.5} />
           <p class="drop-text">
-            Click or drag and drop files here to stage them
+            Click or drag and drop files or folders here to stage them
           </p>
+          <button
+            type="button"
+            class="folder-btn"
+            onclick={openDirectoryPicker}
+          >
+            <Folder size={16} />
+            Choose Folder
+          </button>
         </div>
 
-        {#if stagedFiles.length > 0}
+        {#if stagedItems.length > 0}
           <div class="file-list-header">
-            <p class="file-info">{stagedFiles.length} file(s) ready to upload</p>
+            <p class="file-info">
+              {stagedItems.length} file(s) ready to upload
+            </p>
             <button
               type="button"
               class="clear-btn"
@@ -181,16 +281,20 @@
           </div>
 
           <ul class="file-list" aria-label="Staged upload files">
-            {#each stagedFiles as stagedFile, index}
+            {#each stagedItems as stagedItem, index}
               <li class="file-row">
                 <div class="file-meta">
-                  <span class="file-name" title={stagedFile.name}>{stagedFile.name}</span>
-                  <span class="file-size">{formatFileSize(stagedFile.size)}</span>
+                  <span class="file-name" title={stagedItem.relativePath}
+                    >{stagedItem.relativePath}</span
+                  >
+                  <span class="file-size"
+                    >{formatFileSize(stagedItem.file.size)}</span
+                  >
                 </div>
                 <button
                   type="button"
                   class="remove-btn"
-                  aria-label={`Remove ${stagedFile.name}`}
+                  aria-label={`Remove ${stagedItem.relativePath}`}
                   title="Remove from upload batch"
                   onclick={() => removeStagedFile(index)}
                   disabled={isUploading}
@@ -203,13 +307,18 @@
         {/if}
 
         <div class="modal-actions">
-          <button type="button" onclick={handleClose} class="cancel-btn" disabled={isUploading}>
+          <button
+            type="button"
+            onclick={handleClose}
+            class="cancel-btn"
+            disabled={isUploading}
+          >
             Cancel
           </button>
           <button
             type="submit"
             class="submit-btn"
-            disabled={stagedFiles.length === 0 || isUploading}
+            disabled={stagedItems.length === 0 || isUploading}
           >
             {isUploading ? "Uploading..." : "Upload"}
           </button>
@@ -307,6 +416,23 @@
     margin: 0;
     max-width: 300px;
     line-height: 1.5;
+  }
+
+  .folder-btn {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .folder-btn:hover {
+    border-color: var(--color-primary-600);
+    color: var(--text-primary);
   }
 
   .file-info {
